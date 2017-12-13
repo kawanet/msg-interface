@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var assert = require("assert");
 var _1 = require("../");
 var TITLE = __filename.split("/").pop();

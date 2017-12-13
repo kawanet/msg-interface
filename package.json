@@ -11,7 +11,8 @@
     "@types/node": "^8.0.55",
     "jshint": "^2.9.5",
     "mocha": "^4.0.1",
-    "nyc": "^11.3.0"
+    "nyc": "^11.3.0",
+    "typescript": "^2.6.2"
   },
   "homepage": "https://github.com/kawanet/msg-interface#readme",
   "jshintConfig": {
@@ -22,7 +23,6 @@
     "validthis": true
   },
   "keywords": [
-    "es6",
     "messagepack",
     "msgpack"
   ],
@@ -35,7 +35,8 @@
   "scripts": {
     "jshint": "./node_modules/.bin/jshint .",
     "mocha": "./node_modules/.bin/mocha test",
-    "test": "npm run jshint && npm run mocha"
+    "test": "npm run jshint && npm run mocha",
+    "tsc": "./node_modules/.bin/tsc"
   },
   "typings": "typings/msg-interface.d.ts"
 }
