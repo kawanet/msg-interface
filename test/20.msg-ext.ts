@@ -82,6 +82,10 @@ describe(TITLE, () => {
         assert.equal(packed.length, 6 + 65536);
         assert.equal(atos(packed.slice(0, 7)), "c9-00-01-00-00-0d-0e");
     });
+
+    it("constructor", () => {
+        assert.throws(MsgExt);
+    });
 });
 
 function atos(array) {
