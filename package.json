@@ -36,7 +36,7 @@
   "scripts": {
     "jshint": "./node_modules/.bin/jshint .",
     "mocha": "./node_modules/.bin/mocha test",
-    "test": "npm run jshint && npm run mocha",
+    "test": "npm run tsc && npm run jshint && npm run mocha",
     "tsc": "./node_modules/.bin/tsc"
   },
   "typings": "typings/msg-interface.d.ts"
