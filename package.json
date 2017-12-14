@@ -1,6 +1,6 @@
 {
   "name": "msg-interface",
-  "description": "ES6 msgpack decoder",
+  "description": "Msgpack Container Interface",
   "version": "0.1.0",
   "author": "@kawanet",
   "bugs": {
