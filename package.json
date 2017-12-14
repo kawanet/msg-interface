@@ -12,7 +12,8 @@
     "jshint": "^2.9.5",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
-    "typescript": "^2.6.2"
+    "typescript": "^2.6.2",
+    "zuul": "^3.11.1"
   },
   "homepage": "https://github.com/kawanet/msg-interface#readme",
   "jshintConfig": {
@@ -37,7 +38,8 @@
     "jshint": "./node_modules/.bin/jshint .",
     "mocha": "./node_modules/.bin/mocha test",
     "test": "npm run tsc && npm run jshint && npm run mocha",
-    "tsc": "./node_modules/.bin/tsc"
+    "tsc": "./node_modules/.bin/tsc",
+    "zuul-local": "./node_modules/.bin/zuul --local 4000 --ui mocha-bdd test/*.js"
   },
   "typings": "typings/msg-interface.d.ts"
 }
