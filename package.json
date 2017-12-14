@@ -18,6 +18,7 @@
   "jshintConfig": {
     "mocha": true,
     "node": true,
+    "proto": true,
     "undef": true,
     "unused": true,
     "validthis": true
