@@ -6,14 +6,10 @@ var TITLE = __filename.split("/").pop();
 describe(TITLE, function () {
     it("empty", function () {
         var msg = new _1.MsgExt(1, Buffer.from([]));
-        assert.equal(typeof _1.MsgExt.isMsgExt, "function");
         assert.equal(typeof msg.toMsgpack, "function");
         assert(_1.Msg.isMsg(msg));
-        assert(_1.MsgExt.isMsgExt(msg));
-        assert(!_1.MsgExt.isMsgExt(null));
-        assert(!_1.MsgExt.isMsgExt(0));
-        assert(!_1.MsgExt.isMsgExt(1));
-        assert(!_1.MsgExt.isMsgExt({}));
+        assert.equal(atos(msg.toMsgpack()), "c7-00-01");
+        assert.equal(msg.writeTo(Buffer.alloc(3)), 3);
     });
     it("1 byte", function () {
         var msg = new _1.MsgExt(2, Buffer.from([3]));
@@ -68,7 +64,7 @@ describe(TITLE, function () {
         assert.equal(atos(packed.slice(0, 7)), "c9-00-01-00-00-0d-0e");
     });
     it("constructor", function () {
-        assert.throws(_1.MsgExt);
+        assert.throws(function () { return new _1.MsgExt(256, null); });
     });
 });
 function atos(array) {

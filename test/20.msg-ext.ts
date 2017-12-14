@@ -10,15 +10,13 @@ describe(TITLE, () => {
     it("empty", () => {
         const msg = new MsgExt(1, Buffer.from([]));
 
-        assert.equal(typeof MsgExt.isMsgExt, "function");
         assert.equal(typeof msg.toMsgpack, "function");
 
         assert(Msg.isMsg(msg));
-        assert(MsgExt.isMsgExt(msg));
-        assert(!MsgExt.isMsgExt(null));
-        assert(!MsgExt.isMsgExt(0));
-        assert(!MsgExt.isMsgExt(1));
-        assert(!MsgExt.isMsgExt({}));
+
+        assert.equal(atos(msg.toMsgpack()), "c7-00-01");
+
+        assert.equal(msg.writeTo(Buffer.alloc(3)), 3);
     });
 
     it("1 byte", () => {
@@ -84,7 +82,7 @@ describe(TITLE, () => {
     });
 
     it("constructor", () => {
-        assert.throws(MsgExt);
+        assert.throws(() => new MsgExt(256, null));
     });
 });
 
