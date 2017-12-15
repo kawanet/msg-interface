@@ -7,7 +7,7 @@ export interface MsgInterface {
 
     byteLength?: number;
 
-    toMsgpack?(): Buffer;
+    toMsgpack(): Buffer;
 
     writeTo?(buffer: Buffer, offset?: number): number;
 }
@@ -19,13 +19,13 @@ export declare abstract class Msg implements MsgInterface {
 
     byteLength?: number;
 
-    toMsgpack?(): Buffer;
+    toMsgpack(): Buffer;
 
-    writeTo?(buffer: Buffer, offset?: number): number;
+    writeTo(buffer: Buffer, offset?: number): number;
 }
 
 export declare class MsgExt extends Msg {
-    constructor(type: number, payload: Buffer);
+    constructor(payload: Buffer, type?: number);
 
     buffer: Buffer;
     type: number;

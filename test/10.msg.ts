@@ -39,6 +39,7 @@ describe(TITLE, () => {
 
         // toMsgpack
         const msg = new MsgTest();
+        assert(Msg.isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "01-02");
 
         // writeTo with offset
@@ -59,6 +60,7 @@ describe(TITLE, () => {
         }
 
         const msg = new MsgTest();
+        assert(Msg.isMsg(msg));
 
         // Error: byteLength not given
         assert.equal(msg.byteLength, null);

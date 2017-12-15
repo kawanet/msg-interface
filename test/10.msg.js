@@ -48,6 +48,7 @@ describe(TITLE, function () {
         }(_1.Msg));
         // toMsgpack
         var msg = new MsgTest();
+        assert(_1.Msg.isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "01-02");
         // writeTo with offset
         var buf = Buffer.from([3, 4, 5, 6]);
@@ -69,6 +70,7 @@ describe(TITLE, function () {
             return MsgTest;
         }(_1.Msg));
         var msg = new MsgTest();
+        assert(_1.Msg.isMsg(msg));
         // Error: byteLength not given
         assert.equal(msg.byteLength, null);
         assert.throws(function () { return msg.toMsgpack(); });
