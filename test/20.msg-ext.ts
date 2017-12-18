@@ -82,7 +82,27 @@ describe(TITLE, () => {
     });
 
     it("constructor", () => {
+        const payload = Buffer.alloc(1);
+
+        // correct
+        assert(Msg.isMsg(new MsgExt(payload)));
+        assert(Msg.isMsg(new MsgExt(payload, 1)));
+        assert(Msg.isMsg(new MsgExt(1, payload)));
+
+        // invalid payload
+        assert.throws(() => new MsgExt(null));
+
+        // invalid payload
+        assert.throws(() => new MsgExt(null, 1));
+
+        // invalid both
         assert.throws(() => new MsgExt(null, 256));
+
+        // invalid type
+        assert.throws(() => new MsgExt(payload, 256));
+
+        // invalid type
+        assert.throws(() => new MsgExt(256, payload));
     });
 });
 

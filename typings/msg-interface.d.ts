@@ -52,6 +52,7 @@ export declare abstract class Msg implements MsgInterface {
 
 export declare class MsgExt extends Msg implements MsgExtInterface {
     constructor(payload: Buffer, type?: number);
+    constructor(type: number, payload: Buffer);
 
     /**
      * payload

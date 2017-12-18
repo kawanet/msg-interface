@@ -64,7 +64,21 @@ describe(TITLE, function () {
         assert.equal(atos(packed.slice(0, 7)), "c9-00-01-00-00-0d-0e");
     });
     it("constructor", function () {
+        var payload = Buffer.alloc(1);
+        // correct
+        assert(_1.Msg.isMsg(new _1.MsgExt(payload)));
+        assert(_1.Msg.isMsg(new _1.MsgExt(payload, 1)));
+        assert(_1.Msg.isMsg(new _1.MsgExt(1, payload)));
+        // invalid payload
+        assert.throws(function () { return new _1.MsgExt(null); });
+        // invalid payload
+        assert.throws(function () { return new _1.MsgExt(null, 1); });
+        // invalid both
         assert.throws(function () { return new _1.MsgExt(null, 256); });
+        // invalid type
+        assert.throws(function () { return new _1.MsgExt(payload, 256); });
+        // invalid type
+        assert.throws(function () { return new _1.MsgExt(256, payload); });
     });
 });
 function atos(array) {
