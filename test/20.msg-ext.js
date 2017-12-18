@@ -9,7 +9,7 @@ describe(TITLE, function () {
         assert.equal(typeof msg.toMsgpack, "function");
         assert(_1.Msg.isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "c7-00-01");
-        assert.equal(msg.writeTo(Buffer.alloc(3)), 3);
+        assert.equal(msg.writeMsgpackTo(Buffer.alloc(3)), 3);
     });
     it("1 byte", function () {
         var msg = new _1.MsgExt(Buffer.from([3]), 2);

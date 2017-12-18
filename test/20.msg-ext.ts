@@ -16,7 +16,7 @@ describe(TITLE, () => {
 
         assert.equal(atos(msg.toMsgpack()), "c7-00-01");
 
-        assert.equal(msg.writeTo(Buffer.alloc(3)), 3);
+        assert.equal(msg.writeMsgpackTo(Buffer.alloc(3)), 3);
     });
 
     it("1 byte", () => {

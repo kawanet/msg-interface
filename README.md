@@ -1,10 +1,60 @@
-# UNDER DEVELOPMENT - Msgpack Representation Container Interface
+# Msgpack Container Interface
 
 [![Build Status](https://travis-ci.org/kawanet/msg-interface.svg?branch=master)](https://travis-ci.org/kawanet/msg-interface)
 
-### Synopsis
+### ES6
 
-TBD
+```js
+import {MsgExt} from "msg-interface";
+
+class MsgExtDate extends MsgExt {
+  static from(date) {
+    const payload = Buffer.alloc(8);
+    payload.writeDoubleBE(+date, 0);
+    return new MsgExtDate(payload);
+  }
+
+  toDate() {
+    return new Date(this.buffer.readDoubleBE(0));
+  }
+}
+
+MsgExtDate.prototype.type = 0x0D;
+
+const now = Date.UTC(2018, 0, 2, 3, 4, 5);
+const msg = MsgExtDate.from(now);
+const buffer = msg.toMsgpack(); // => <Buffer d7 01 42 76 15 28 a3 60 80 00>
+const dt = msg.toDate(); // => 2018-01-02T03:04:05.000Z
+```
+
+### ES5
+
+```js
+var MsgExt = require("msg-interface").MsgExt;
+
+function MsgExtDate(payload) {
+  MsgExt.call(this, payload);
+}
+
+MsgExtDate.from = function(date) {
+  var payload = Buffer.alloc(8);
+  payload.writeDoubleBE(+date, 0);
+  return new MsgExtDate(payload);
+};
+
+MsgExtDate.prototype = Object.create(MsgExt.prototype);
+
+MsgExtDate.prototype.type = 0x0D;
+
+MsgExtDate.prototype.toDate = function() {
+  return new Date(this.buffer.readDoubleBE(0));
+};
+
+var now = Date.UTC(2018, 0, 2, 3, 4, 5);
+var msg = MsgExtDate.from(now);
+var buffer = msg.toMsgpack(); // => <Buffer d7 01 42 76 15 28 a3 60 80 00>
+var dt = msg.toDate(); // => 2018-01-02T03:04:05.000Z
+```
 
 ### GitHub
 

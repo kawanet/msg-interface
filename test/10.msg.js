@@ -24,22 +24,25 @@ describe(TITLE, function () {
         }(_1.Msg));
         var msg = new MsgTest();
         assert.equal(typeof _1.Msg.isMsg, "function");
+        assert.equal(typeof msg.writeMsgpackTo, "function");
         assert.equal(typeof msg.toMsgpack, "function");
-        assert(_1.Msg.isMsg(msg));
         assert(!_1.Msg.isMsg(null));
         assert(!_1.Msg.isMsg(0));
         assert(!_1.Msg.isMsg(1));
         assert(!_1.Msg.isMsg({}));
         // Error: toMsgpack() not implemented
         assert.throws(function () { return msg.toMsgpack(); });
-        // Error: writeTo() not implemented
-        assert.throws(function () { return msg.writeTo(null); });
+        // Error: writeMsgpackTo() not implemented
+        assert.throws(function () { return msg.writeMsgpackTo(Buffer.alloc(2)); });
     });
     it("toMsgpack", function () {
+        // writeMsgpackTo feature is provided by Msg class in effect
         var MsgTest = /** @class */ (function (_super) {
             __extends(MsgTest, _super);
             function MsgTest() {
-                return _super !== null && _super.apply(this, arguments) || this;
+                var _this = _super !== null && _super.apply(this, arguments) || this;
+                _this.byteLength = 2;
+                return _this;
             }
             MsgTest.prototype.toMsgpack = function () {
                 return Buffer.from([1, 2]);
@@ -50,39 +53,39 @@ describe(TITLE, function () {
         var msg = new MsgTest();
         assert(_1.Msg.isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "01-02");
-        // writeTo with offset
+        // writeMsgpackTo with offset
         var buf = Buffer.from([3, 4, 5, 6]);
-        assert.equal(msg.writeTo(buf, 1), 2);
+        assert.equal(msg.writeMsgpackTo(buf, 1), 2);
         assert.equal(atos(buf), "03-01-02-06");
-        // writeTo without offset
-        assert.equal(msg.writeTo(buf), 2);
+        // writeMsgpackTo without offset
+        assert.equal(msg.writeMsgpackTo(buf), 2);
         assert.equal(atos(buf), "01-02-02-06");
     });
-    it("writeTo", function () {
+    it("writeMsgpackTo", function () {
         var MsgTest = /** @class */ (function (_super) {
             __extends(MsgTest, _super);
             function MsgTest() {
                 return _super !== null && _super.apply(this, arguments) || this;
             }
-            MsgTest.prototype.writeTo = function (buffer, offset) {
+            MsgTest.prototype.writeMsgpackTo = function (buffer, offset) {
                 return buffer.writeUInt16BE(0x0708, offset);
             };
             return MsgTest;
         }(_1.Msg));
         var msg = new MsgTest();
-        assert(_1.Msg.isMsg(msg));
         // Error: byteLength not given
         assert.equal(msg.byteLength, null);
         assert.throws(function () { return msg.toMsgpack(); });
         // toMsgpack
         msg.byteLength = 2;
+        assert(_1.Msg.isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "07-08");
-        // writeTo with offset
+        // writeMsgpackTo with offset
         var buf = Buffer.from([9, 10, 11, 12]);
-        msg.writeTo(buf, 1);
+        msg.writeMsgpackTo(buf, 1);
         assert.equal(atos(buf), "09-07-08-0c");
-        // writeTo without offset
-        msg.writeTo(buf);
+        // writeMsgpackTo without offset
+        msg.writeMsgpackTo(buf);
         assert.equal(atos(buf), "07-08-08-0c");
     });
 });
