@@ -7,7 +7,7 @@ describe(TITLE, function () {
     it("empty", function () {
         var msg = new _1.MsgExt(Buffer.from([]), 1);
         assert.equal(typeof msg.toMsgpack, "function");
-        assert(_1.Msg.isMsg(msg));
+        assert(_1.isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "c7-00-01");
         assert.equal(msg.writeMsgpackTo(Buffer.alloc(3)), 3);
     });
@@ -66,9 +66,9 @@ describe(TITLE, function () {
     it("constructor", function () {
         var payload = Buffer.alloc(1);
         // correct
-        assert(_1.Msg.isMsg(new _1.MsgExt(payload)));
-        assert(_1.Msg.isMsg(new _1.MsgExt(payload, 1)));
-        assert(_1.Msg.isMsg(new _1.MsgExt(1, payload)));
+        assert(_1.isMsg(new _1.MsgExt(payload)));
+        assert(_1.isMsg(new _1.MsgExt(payload, 1)));
+        assert(_1.isMsg(new _1.MsgExt(1, payload)));
         // invalid payload
         assert.throws(function () { return new _1.MsgExt(null); });
         // invalid payload

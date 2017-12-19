@@ -23,16 +23,16 @@ describe(TITLE, function () {
             return MsgTest;
         }(_1.Msg));
         var msg = new MsgTest();
-        assert.equal(typeof _1.Msg.isMsg, "function");
+        assert.equal(typeof _1.isMsg, "function");
         assert.equal(typeof msg.writeMsgpackTo, "function");
         assert.equal(typeof msg.toMsgpack, "function");
-        assert(!_1.Msg.isMsg(null));
-        assert(!_1.Msg.isMsg(0));
-        assert(!_1.Msg.isMsg(1));
-        assert(!_1.Msg.isMsg({}));
-        // Error: toMsgpack() not implemented
+        assert(!_1.isMsg(null));
+        assert(!_1.isMsg(0));
+        assert(!_1.isMsg(1));
+        assert(!_1.isMsg({}));
+        // Error: Invalid byteLength
         assert.throws(function () { return msg.toMsgpack(); });
-        // Error: writeMsgpackTo() not implemented
+        // Error: Method not implemented: writeMsgpackTo
         assert.throws(function () { return msg.writeMsgpackTo(Buffer.alloc(2)); });
     });
     it("toMsgpack", function () {
@@ -51,7 +51,7 @@ describe(TITLE, function () {
         }(_1.Msg));
         // toMsgpack
         var msg = new MsgTest();
-        assert(_1.Msg.isMsg(msg));
+        assert(_1.isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "01-02");
         // writeMsgpackTo with offset
         var buf = Buffer.from([3, 4, 5, 6]);
@@ -73,12 +73,12 @@ describe(TITLE, function () {
             return MsgTest;
         }(_1.Msg));
         var msg = new MsgTest();
-        // Error: byteLength not given
+        // Error: Invalid byteLength
         assert.equal(msg.byteLength, null);
         assert.throws(function () { return msg.toMsgpack(); });
         // toMsgpack
         msg.byteLength = 2;
-        assert(_1.Msg.isMsg(msg));
+        assert(_1.isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "07-08");
         // writeMsgpackTo with offset
         var buf = Buffer.from([9, 10, 11, 12]);
@@ -87,6 +87,31 @@ describe(TITLE, function () {
         // writeMsgpackTo without offset
         msg.writeMsgpackTo(buf);
         assert.equal(atos(buf), "07-08-08-0c");
+    });
+    it("MsgString", function () {
+        var MsgString32 = /** @class */ (function (_super) {
+            __extends(MsgString32, _super);
+            function MsgString32() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            MsgString32.from = function (string) {
+                var msg = new MsgString32();
+                msg.value = string;
+                // maximum byte length
+                msg.byteLength = 5 + string.length * 3;
+                return msg;
+            };
+            MsgString32.prototype.writeMsgpackTo = function (buffer, offset) {
+                buffer[offset] = 0xdb;
+                // actual byte length
+                var length = buffer.write(this.value, offset + 5);
+                buffer.writeUInt32BE(length, offset + 1);
+                return 5 + length;
+            };
+            return MsgString32;
+        }(_1.Msg));
+        var msg = MsgString32.from("ABC");
+        assert.equal(atos(msg.toMsgpack()), "db-00-00-00-03-41-42-43");
     });
 });
 function atos(array) {

@@ -1,7 +1,7 @@
 "use strict";
 
 import * as assert from "assert";
-import {Msg} from "../";
+import {Msg, isMsg} from "../";
 
 const TITLE = __filename.split("/").pop();
 
@@ -14,19 +14,19 @@ describe(TITLE, () => {
 
         const msg = new MsgTest();
 
-        assert.equal(typeof Msg.isMsg, "function");
+        assert.equal(typeof isMsg, "function");
         assert.equal(typeof msg.writeMsgpackTo, "function");
         assert.equal(typeof msg.toMsgpack, "function");
 
-        assert(!Msg.isMsg(null));
-        assert(!Msg.isMsg(0));
-        assert(!Msg.isMsg(1));
-        assert(!Msg.isMsg({}));
+        assert(!isMsg(null));
+        assert(!isMsg(0));
+        assert(!isMsg(1));
+        assert(!isMsg({}));
 
-        // Error: toMsgpack() not implemented
+        // Error: Invalid byteLength
         assert.throws(() => msg.toMsgpack());
 
-        // Error: writeMsgpackTo() not implemented
+        // Error: Method not implemented: writeMsgpackTo
         assert.throws(() => msg.writeMsgpackTo(Buffer.alloc(2)));
     });
 
@@ -42,7 +42,7 @@ describe(TITLE, () => {
 
         // toMsgpack
         const msg = new MsgTest();
-        assert(Msg.isMsg(msg));
+        assert(isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "01-02");
 
         // writeMsgpackTo with offset
@@ -64,13 +64,13 @@ describe(TITLE, () => {
 
         const msg = new MsgTest();
 
-        // Error: byteLength not given
+        // Error: Invalid byteLength
         assert.equal(msg.byteLength, null);
         assert.throws(() => msg.toMsgpack());
 
         // toMsgpack
         msg.byteLength = 2;
-        assert(Msg.isMsg(msg));
+        assert(isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "07-08");
 
         // writeMsgpackTo with offset
@@ -81,6 +81,31 @@ describe(TITLE, () => {
         // writeMsgpackTo without offset
         msg.writeMsgpackTo(buf);
         assert.equal(atos(buf), "07-08-08-0c");
+    });
+
+    it("MsgString", () => {
+        class MsgString32 extends Msg {
+            static from(string: string) {
+                const msg = new MsgString32();
+                msg.value = string;
+                // maximum byte length
+                msg.byteLength = 5 + string.length * 3;
+                return msg;
+            }
+
+            writeMsgpackTo(buffer: Buffer, offset?: number) {
+                buffer[offset] = 0xdb;
+                // actual byte length
+                const length = buffer.write(this.value, offset + 5);
+                buffer.writeUInt32BE(length, offset + 1);
+                return 5 + length;
+            }
+
+            value: string;
+        }
+
+        const msg = MsgString32.from("ABC");
+        assert.equal(atos(msg.toMsgpack()), "db-00-00-00-03-41-42-43");
     });
 });
 

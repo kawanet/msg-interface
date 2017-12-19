@@ -4,35 +4,28 @@
 
 export interface MsgInterface {
     /**
-     * maximum length of msgpack representation in bytes
+     * expected maximum length of msgpack representation in bytes
      */
     byteLength: number;
+
+    /**
+     * @return {Buffer} msgpack representation
+     */
+    toMsgpack(): Buffer;
 
     /**
      * write the msgpack representation to the buffer with an optional offset address
      * @return {number} actual length of written in bytes
      */
-    writeMsgpackTo?(buffer: Buffer, offset?: number): number;
+    writeMsgpackTo(buffer: Buffer, offset?: number): number;
 }
 
-export interface MsgExtInterface extends MsgInterface {
-    /**
-     * payload
-     */
-    buffer: Buffer;
-
-    /**
-     * msgpack extension type number: -128 to +127
-     */
-    type: number;
-}
+/**
+ * @return {boolean} true when the argument has the MsgInterface implemented
+ */
+export declare function isMsg(msg: any): boolean;
 
 export declare abstract class Msg implements MsgInterface {
-    /**
-     * @return {boolean} true when the argument has the MsgInterface implemented
-     */
-    static isMsg(msg: any): boolean;
-
     /**
      * expected maximum length of msgpack representation in bytes
      */
@@ -50,7 +43,21 @@ export declare abstract class Msg implements MsgInterface {
     writeMsgpackTo(buffer: Buffer, offset?: number): number;
 }
 
-export declare class MsgExt extends Msg implements MsgExtInterface {
+export declare class MsgRaw extends Msg {
+    constructor(buffer: Buffer, start?: number, end?: number);
+
+    /**
+     * raw msgpack representation
+     */
+    buffer: Buffer;
+
+    /**
+     * offset position
+     */
+    offset: number;
+}
+
+export declare class MsgExt extends Msg {
     constructor(payload: Buffer, type?: number);
     constructor(type: number, payload: Buffer);
 

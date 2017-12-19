@@ -1,7 +1,7 @@
 "use strict";
 
 import * as assert from "assert";
-import {Msg, MsgExt} from "../";
+import {isMsg, MsgExt} from "../";
 
 const TITLE = __filename.split("/").pop();
 
@@ -12,7 +12,7 @@ describe(TITLE, () => {
 
         assert.equal(typeof msg.toMsgpack, "function");
 
-        assert(Msg.isMsg(msg));
+        assert(isMsg(msg));
 
         assert.equal(atos(msg.toMsgpack()), "c7-00-01");
 
@@ -85,9 +85,9 @@ describe(TITLE, () => {
         const payload = Buffer.alloc(1);
 
         // correct
-        assert(Msg.isMsg(new MsgExt(payload)));
-        assert(Msg.isMsg(new MsgExt(payload, 1)));
-        assert(Msg.isMsg(new MsgExt(1, payload)));
+        assert(isMsg(new MsgExt(payload)));
+        assert(isMsg(new MsgExt(payload, 1)));
+        assert(isMsg(new MsgExt(1, payload)));
 
         // invalid payload
         assert.throws(() => new MsgExt(null));
