@@ -30,7 +30,7 @@ describe(TITLE, function () {
         assert(!_1.isMsg(0));
         assert(!_1.isMsg(1));
         assert(!_1.isMsg({}));
-        // Error: Invalid byteLength
+        // Error: Invalid msgpackLength
         assert.throws(function () { return msg.toMsgpack(); });
         // Error: Method not implemented: writeMsgpackTo
         assert.throws(function () { return msg.writeMsgpackTo(Buffer.alloc(2)); });
@@ -41,7 +41,7 @@ describe(TITLE, function () {
             __extends(MsgTest, _super);
             function MsgTest() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
-                _this.byteLength = 2;
+                _this.msgpackLength = 2;
                 return _this;
             }
             MsgTest.prototype.toMsgpack = function () {
@@ -73,11 +73,11 @@ describe(TITLE, function () {
             return MsgTest;
         }(_1.Msg));
         var msg = new MsgTest();
-        // Error: Invalid byteLength
-        assert.equal(msg.byteLength, null);
+        // Error: Invalid msgpackLength
+        assert.equal(msg.msgpackLength, null);
         assert.throws(function () { return msg.toMsgpack(); });
         // toMsgpack
-        msg.byteLength = 2;
+        msg.msgpackLength = 2;
         assert(_1.isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "07-08");
         // writeMsgpackTo with offset
@@ -98,7 +98,7 @@ describe(TITLE, function () {
                 var msg = new MsgString32();
                 msg.value = string;
                 // maximum byte length
-                msg.byteLength = 5 + string.length * 3;
+                msg.msgpackLength = 5 + string.length * 3;
                 return msg;
             };
             MsgString32.prototype.writeMsgpackTo = function (buffer, offset) {

@@ -6,7 +6,7 @@ export interface MsgInterface {
     /**
      * expected maximum length of msgpack representation in bytes
      */
-    byteLength: number;
+    msgpackLength: number;
 
     /**
      * @return {Buffer} msgpack representation
@@ -29,7 +29,7 @@ export declare abstract class Msg implements MsgInterface {
     /**
      * expected maximum length of msgpack representation in bytes
      */
-    byteLength: number;
+    msgpackLength: number;
 
     /**
      * @return {Buffer} msgpack representation

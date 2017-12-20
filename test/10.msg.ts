@@ -23,7 +23,7 @@ describe(TITLE, () => {
         assert(!isMsg(1));
         assert(!isMsg({}));
 
-        // Error: Invalid byteLength
+        // Error: Invalid msgpackLength
         assert.throws(() => msg.toMsgpack());
 
         // Error: Method not implemented: writeMsgpackTo
@@ -33,7 +33,7 @@ describe(TITLE, () => {
     it("toMsgpack", () => {
         // writeMsgpackTo feature is provided by Msg class in effect
         class MsgTest extends Msg {
-            byteLength = 2;
+            msgpackLength = 2;
 
             toMsgpack() {
                 return Buffer.from([1, 2]);
@@ -64,12 +64,12 @@ describe(TITLE, () => {
 
         const msg = new MsgTest();
 
-        // Error: Invalid byteLength
-        assert.equal(msg.byteLength, null);
+        // Error: Invalid msgpackLength
+        assert.equal(msg.msgpackLength, null);
         assert.throws(() => msg.toMsgpack());
 
         // toMsgpack
-        msg.byteLength = 2;
+        msg.msgpackLength = 2;
         assert(isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "07-08");
 
@@ -89,7 +89,7 @@ describe(TITLE, () => {
                 const msg = new MsgString32();
                 msg.value = string;
                 // maximum byte length
-                msg.byteLength = 5 + string.length * 3;
+                msg.msgpackLength = 5 + string.length * 3;
                 return msg;
             }
 
