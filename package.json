@@ -7,13 +7,13 @@
     "url": "https://github.com/kawanet/msg-interface/issues"
   },
   "devDependencies": {
-    "@types/mocha": "^2.2.44",
-    "@types/node": "^8.0.55",
+    "@types/mocha": "^5.2.4",
+    "@types/node": "^10.5.2",
     "jshint": "^2.9.5",
-    "mocha": "^4.0.1",
-    "nyc": "^11.3.0",
-    "typescript": "^2.6.2",
-    "zuul": "^3.11.1"
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2",
+    "typescript": "^2.9.2",
+    "zuul": "^3.12.0"
   },
   "homepage": "https://github.com/kawanet/msg-interface#readme",
   "jshintConfig": {
