@@ -1,5 +1,7 @@
 "use strict";
 
+// This is not written in TypeScript but in JavaScript (ES5), to full fill test code coverage.
+
 var assert = require("assert");
 var MsgInterface = require("../");
 

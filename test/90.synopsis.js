@@ -1,5 +1,7 @@
 "use strict";
 
+// This is not written in TypeScript but in JavaScript (ES5), to run test ES5 synopsis code on README.md
+
 var assert = require("assert");
 var MsgExt = require("../").MsgExt;
 

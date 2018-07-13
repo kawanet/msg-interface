@@ -1,5 +1,7 @@
 "use strict";
 
+// This is written in TypeScript, to run test ES6 synopsis code on README.md
+
 import * as assert from "assert";
 import {MsgExt} from "../";
 

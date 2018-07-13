@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var assert = require("assert");
-var _1 = require("../");
+var __1 = require("../");
 var TITLE = __filename.split("/").pop();
 describe(TITLE, function () {
     it("Msg", function () {
@@ -21,15 +21,15 @@ describe(TITLE, function () {
                 return _super !== null && _super.apply(this, arguments) || this;
             }
             return MsgTest;
-        }(_1.Msg));
+        }(__1.Msg));
         var msg = new MsgTest();
-        assert.equal(typeof _1.isMsg, "function");
+        assert.equal(typeof __1.isMsg, "function");
         assert.equal(typeof msg.writeMsgpackTo, "function");
         assert.equal(typeof msg.toMsgpack, "function");
-        assert(!_1.isMsg(null));
-        assert(!_1.isMsg(0));
-        assert(!_1.isMsg(1));
-        assert(!_1.isMsg({}));
+        assert(!__1.isMsg(null));
+        assert(!__1.isMsg(0));
+        assert(!__1.isMsg(1));
+        assert(!__1.isMsg({}));
         // Error: Invalid msgpackLength
         assert.throws(function () { return msg.toMsgpack(); });
         // Error: Method not implemented: writeMsgpackTo
@@ -48,10 +48,10 @@ describe(TITLE, function () {
                 return Buffer.from([1, 2]);
             };
             return MsgTest;
-        }(_1.Msg));
+        }(__1.Msg));
         // toMsgpack
         var msg = new MsgTest();
-        assert(_1.isMsg(msg));
+        assert(__1.isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "01-02");
         // writeMsgpackTo with offset
         var buf = Buffer.from([3, 4, 5, 6]);
@@ -71,14 +71,14 @@ describe(TITLE, function () {
                 return buffer.writeUInt16BE(0x0708, offset);
             };
             return MsgTest;
-        }(_1.Msg));
+        }(__1.Msg));
         var msg = new MsgTest();
         // Error: Invalid msgpackLength
         assert.equal(msg.msgpackLength, null);
         assert.throws(function () { return msg.toMsgpack(); });
         // toMsgpack
         msg.msgpackLength = 2;
-        assert(_1.isMsg(msg));
+        assert(__1.isMsg(msg));
         assert.equal(atos(msg.toMsgpack()), "07-08");
         // writeMsgpackTo with offset
         var buf = Buffer.from([9, 10, 11, 12]);
@@ -109,7 +109,7 @@ describe(TITLE, function () {
                 return 5 + length;
             };
             return MsgString32;
-        }(_1.Msg));
+        }(__1.Msg));
         var msg = MsgString32.from("ABC");
         assert.equal(atos(msg.toMsgpack()), "db-00-00-00-03-41-42-43");
     });

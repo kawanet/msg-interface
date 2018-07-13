@@ -10,8 +10,9 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+// This is written in TypeScript, to run test ES6 synopsis code on README.md
 var assert = require("assert");
-var _1 = require("../");
+var __1 = require("../");
 var TITLE = __filename.split("/").pop();
 describe(TITLE, function () {
     it("MsgExtDate", function () {
@@ -29,7 +30,7 @@ describe(TITLE, function () {
                 return new Date(this.buffer.readDoubleBE(0));
             };
             return MsgExtDate;
-        }(_1.MsgExt));
+        }(__1.MsgExt));
         MsgExtDate.prototype.type = 0x0D;
         var now = Date.UTC(2018, 0, 2, 3, 4, 5);
         var msg = MsgExtDate.from(now);
