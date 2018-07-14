@@ -1,6 +1,6 @@
 # Msgpack Container Interface
 
-[![Build Status](https://travis-ci.org/kawanet/msg-interface.svg?branch=master)](https://travis-ci.org/kawanet/msg-interface)
+[![Build Status](https://travis-ci.org/kawanet/msg-interface.svg?branch=master)](https://travis-ci.org/kawanet/msg-interface) [![Coverage Status](https://coveralls.io/repos/github/kawanet/msg-interface/badge.svg)](https://coveralls.io/github/kawanet/msg-interface)
 
 ### ES6
 
