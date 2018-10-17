@@ -9,11 +9,6 @@ export interface MsgInterface {
     msgpackLength: number;
 
     /**
-     * @return {Buffer} msgpack representation
-     */
-    toMsgpack(): Buffer;
-
-    /**
      * write the msgpack representation to the buffer with an optional offset address
      * @return {number} actual length of written in bytes
      */
@@ -25,16 +20,16 @@ export interface MsgInterface {
  */
 export declare function isMsg(msg: any): boolean;
 
+/**
+ * @return {Buffer} msgpack representation
+ */
+export declare function msgToBuffer(msg: MsgInterface): Buffer;
+
 export declare abstract class Msg implements MsgInterface {
     /**
      * expected maximum length of msgpack representation in bytes
      */
     msgpackLength: number;
-
-    /**
-     * @return {Buffer} msgpack representation
-     */
-    toMsgpack(): Buffer;
 
     /**
      * write the msgpack representation to the buffer with an optional offset address

@@ -1,7 +1,7 @@
 "use strict";
 
 import * as assert from "assert";
-import {Msg, isMsg} from "../";
+import {Msg, isMsg, msgToBuffer} from "../";
 
 const TITLE = __filename.split("/").pop() as string;
 
@@ -16,7 +16,7 @@ describe(TITLE, () => {
 
         assert.equal(typeof isMsg, "function");
         assert.equal(typeof msg.writeMsgpackTo, "function");
-        assert.equal(typeof msg.toMsgpack, "function");
+        assert.equal(typeof msgToBuffer, "function");
 
         assert(!isMsg(null));
         assert(!isMsg(0));
@@ -24,35 +24,10 @@ describe(TITLE, () => {
         assert(!isMsg({}));
 
         // Error: Invalid msgpackLength
-        assert.throws(() => msg.toMsgpack());
+        assert.throws(() => msgToBuffer(msg));
 
         // Error: Method not implemented: writeMsgpackTo
         assert.throws(() => msg.writeMsgpackTo(Buffer.alloc(2)));
-    });
-
-    it("toMsgpack", () => {
-        // writeMsgpackTo feature is provided by Msg class in effect
-        class MsgTest extends Msg {
-            msgpackLength = 2;
-
-            toMsgpack() {
-                return Buffer.from([1, 2]);
-            }
-        }
-
-        // toMsgpack
-        const msg = new MsgTest();
-        assert(isMsg(msg));
-        assert.equal(atos(msg.toMsgpack()), "01-02");
-
-        // writeMsgpackTo with offset
-        const buf = Buffer.from([3, 4, 5, 6]);
-        assert.equal(msg.writeMsgpackTo(buf, 1), 2);
-        assert.equal(atos(buf), "03-01-02-06");
-
-        // writeMsgpackTo without offset
-        assert.equal(msg.writeMsgpackTo(buf), 2);
-        assert.equal(atos(buf), "01-02-02-06");
     });
 
     it("writeMsgpackTo", () => {
@@ -67,12 +42,12 @@ describe(TITLE, () => {
 
         // Error: Invalid msgpackLength
         assert.equal(msg.msgpackLength, null);
-        assert.throws(() => msg.toMsgpack());
+        assert.throws(() => msgToBuffer(msg));
 
-        // toMsgpack
+        // msgToBuffer
         msg.msgpackLength = 2;
         assert(isMsg(msg));
-        assert.equal(atos(msg.toMsgpack()), "07-08");
+        assert.equal(atos(msgToBuffer(msg)), "07-08");
 
         // writeMsgpackTo with offset
         const buf = Buffer.from([9, 10, 11, 12]);
@@ -107,7 +82,7 @@ describe(TITLE, () => {
         }
 
         const msg = MsgString32.from("ABC");
-        assert.equal(atos(msg.toMsgpack()), "db-00-00-00-03-41-42-43");
+        assert.equal(atos(msgToBuffer(msg)), "db-00-00-00-03-41-42-43");
     });
 });
 

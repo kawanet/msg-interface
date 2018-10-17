@@ -13,26 +13,26 @@ describe(TITLE, function() {
     var buffer = Buffer.from([1]);
     var msg = MsgInterface.MsgRaw(buffer);
     assert(MsgInterface.isMsg(msg));
-    assert.equal(atos(msg.toMsgpack()), "01");
+    assert.equal(atos(MsgInterface.msgToBuffer(msg)), "01");
   });
 
   it("MsgRaw", function() {
     var msg = MsgInterface.MsgRaw([2]);
     assert(MsgInterface.isMsg(msg));
-    assert.equal(atos(msg.toMsgpack()), "02");
+    assert.equal(atos(MsgInterface.msgToBuffer(msg)), "02");
   });
 
   it("MsgExt", function() {
     var buffer = Buffer.from([3]);
     var msg = MsgInterface.MsgExt(buffer, 4);
     assert(MsgInterface.isMsg(msg));
-    assert.equal(atos(msg.toMsgpack()), "d4-04-03");
+    assert.equal(atos(MsgInterface.msgToBuffer(msg)), "d4-04-03");
   });
 
   it("MsgExt", function() {
     var msg = MsgInterface.MsgExt([5], 6);
     assert(MsgInterface.isMsg(msg));
-    assert.equal(atos(msg.toMsgpack()), "d4-06-05");
+    assert.equal(atos(MsgInterface.msgToBuffer(msg)), "d4-06-05");
   });
 });
 

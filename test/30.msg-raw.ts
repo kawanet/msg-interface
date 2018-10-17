@@ -1,7 +1,7 @@
 "use strict";
 
 import * as assert from "assert";
-import {isMsg, MsgRaw} from "../";
+import {isMsg, MsgRaw, msgToBuffer} from "../";
 
 const TITLE = __filename.split("/").pop() as string;
 
@@ -12,7 +12,7 @@ describe(TITLE, () => {
         const msg = new MsgRaw(buffer);
 
         assert(isMsg(msg));
-        assert.equal(atos(msg.toMsgpack()), "01-ff");
+        assert.equal(atos(msgToBuffer(msg)), "01-ff");
 
         // writeMsgpackTo with offset
         const buf = Buffer.from([9, 10, 11, 12]);
@@ -29,7 +29,7 @@ describe(TITLE, () => {
         const msg = new MsgRaw(buffer, 1);
 
         assert(isMsg(msg));
-        assert.equal(atos(msg.toMsgpack()), "01-ff");
+        assert.equal(atos(msgToBuffer(msg)), "01-ff");
 
         // writeMsgpackTo with offset
         const buf = Buffer.from([9, 10, 11, 12]);
@@ -46,7 +46,7 @@ describe(TITLE, () => {
         const msg = new MsgRaw(buffer, 1, 3);
 
         assert(isMsg(msg));
-        assert.equal(atos(msg.toMsgpack()), "01-ff");
+        assert.equal(atos(msgToBuffer(msg)), "01-ff");
 
         // writeMsgpackTo with offset
         const buf = Buffer.from([9, 10, 11, 12]);

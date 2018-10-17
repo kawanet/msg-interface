@@ -3,7 +3,8 @@
 // This is not written in TypeScript but in JavaScript (ES5), to run test ES5 synopsis code on README.md
 
 var assert = require("assert");
-var MsgExt = require("../").MsgExt;
+var MsgInterface = require("../");
+var MsgExt = MsgInterface.MsgExt;
 
 var TITLE = __filename.split("/").pop();
 
@@ -33,7 +34,7 @@ describe(TITLE, function() {
     assert.equal(msg.buffer.length, 8);
     assert.equal(msg.msgpackLength, 10);
 
-    var buffer = msg.toMsgpack(); // => <Buffer d7 01 42 76 15 28 a3 60 80 00>
+    var buffer = MsgInterface.msgToBuffer(msg); // => <Buffer d7 01 42 76 15 28 a3 60 80 00>
     assert.equal(atos(buffer), "d7-0d-42-76-0b-4d-37-48-80-00");
 
     var dt = msg.toDate(); // => 2018-01-02T03:04:05.000Z
