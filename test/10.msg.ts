@@ -16,9 +16,9 @@ describe(TITLE, () => {
 
         const msg = new MsgTest();
 
-        assert.equal(typeof isMsg, "function");
-        assert.equal(typeof msg.writeMsgpackTo, "function");
-        assert.equal(typeof msgToBuffer, "function");
+        assert.strictEqual(typeof isMsg, "function");
+        assert.strictEqual(typeof msg.writeMsgpackTo, "function");
+        assert.strictEqual(typeof msgToBuffer, "function");
 
         assert(!isMsg(null));
         assert(!isMsg(0));
@@ -43,22 +43,22 @@ describe(TITLE, () => {
         const msg = new MsgTest();
 
         // Error: Invalid msgpackLength
-        assert.equal(msg.msgpackLength, null);
+        assert.strictEqual(msg.msgpackLength, void 0);
         assert.throws(() => msgToBuffer(msg));
 
         // msgToBuffer
         msg.msgpackLength = 2;
         assert(isMsg(msg));
-        assert.equal(atos(msgToBuffer(msg)), "07-08");
+        assert.strictEqual(atos(msgToBuffer(msg)), "07-08");
 
         // writeMsgpackTo with offset
         const buf = Buffer.from([9, 10, 11, 12]);
         msg.writeMsgpackTo(buf, 1);
-        assert.equal(atos(buf), "09-07-08-0c");
+        assert.strictEqual(atos(buf), "09-07-08-0c");
 
         // writeMsgpackTo without offset
         msg.writeMsgpackTo(buf);
-        assert.equal(atos(buf), "07-08-08-0c");
+        assert.strictEqual(atos(buf), "07-08-08-0c");
     });
 
     it("MsgString", () => {
@@ -84,6 +84,6 @@ describe(TITLE, () => {
         }
 
         const msg = MsgString32.from("ABC");
-        assert.equal(atos(msgToBuffer(msg)), "db-00-00-00-03-41-42-43");
+        assert.strictEqual(atos(msgToBuffer(msg)), "db-00-00-00-03-41-42-43");
     });
 });

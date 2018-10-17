@@ -30,14 +30,14 @@ describe(TITLE, function () {
         const now = Date.UTC(2018, 0, 2, 3, 4, 5);
         const msg = MsgExtDate.from(now);
 
-        assert.equal(msg.type, 0x0D);
-        assert.equal(msg.buffer.length, 8);
-        assert.equal(msg.msgpackLength, 10);
+        assert.strictEqual(msg.type, 0x0D);
+        assert.strictEqual(msg.buffer.length, 8);
+        assert.strictEqual(msg.msgpackLength, 10);
 
         const buffer = msgToBuffer(msg); // => <Buffer d7 01 42 76 15 28 a3 60 80 00>
-        assert.equal(atos(buffer), "d7-0d-42-76-0b-4d-37-48-80-00");
+        assert.strictEqual(atos(buffer), "d7-0d-42-76-0b-4d-37-48-80-00");
 
         const dt = msg.toDate(); // => 2018-01-02T03:04:05.000Z
-        assert.equal(+dt, +now);
+        assert.strictEqual(+dt, +now);
     });
 });
