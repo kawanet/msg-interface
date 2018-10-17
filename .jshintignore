@@ -1,2 +1,4 @@
 *~
 node_modules
+test/[123]*.js
+test/95.*.js

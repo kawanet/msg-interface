@@ -3,7 +3,7 @@
 import * as assert from "assert";
 import {isMsg, MsgRaw} from "../";
 
-const TITLE = __filename.split("/").pop();
+const TITLE = __filename.split("/").pop() as string;
 
 describe(TITLE, () => {
 
@@ -59,8 +59,8 @@ describe(TITLE, () => {
     });
 });
 
-function atos(array) {
-    return [].map.call(array, (v) => {
+function atos(array: number[] | Buffer) {
+    return [].map.call(array, function (v: number) {
         return (v > 15 ? "" : "0") + v.toString(16);
     }).join("-");
 }

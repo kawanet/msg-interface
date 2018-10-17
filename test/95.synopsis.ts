@@ -5,14 +5,14 @@
 import * as assert from "assert";
 import {MsgExt} from "../";
 
-const TITLE = __filename.split("/").pop();
+const TITLE = __filename.split("/").pop() as string;
 
 describe(TITLE, function () {
 
     it("MsgExtDate", function () {
 
         class MsgExtDate extends MsgExt {
-            static from(date) {
+            static from(date: number) {
                 const payload = Buffer.alloc(8);
                 payload.writeDoubleBE(+date, 0);
                 return new MsgExtDate(payload);
@@ -40,8 +40,8 @@ describe(TITLE, function () {
     });
 });
 
-function atos(array) {
-    return [].map.call(array, function (v) {
+function atos(array: number[] | Buffer) {
+    return [].map.call(array, function (v: number) {
         return (v > 15 ? "" : "0") + v.toString(16);
     }).join("-");
 }
