@@ -5,7 +5,7 @@
 ### ES6
 
 ```js
-import {MsgExt} from "msg-interface";
+import {MsgExt, msgToBuffer} from "msg-interface";
 
 class MsgExtDate extends MsgExt {
   static from(date) {
@@ -23,14 +23,16 @@ MsgExtDate.prototype.type = 0x0D;
 
 const now = Date.UTC(2018, 0, 2, 3, 4, 5);
 const msg = MsgExtDate.from(now);
-const buffer = msg.toMsgpack(); // => <Buffer d7 01 42 76 15 28 a3 60 80 00>
+const buffer = msgToBuffer(msg); // => <Buffer d7 01 42 76 15 28 a3 60 80 00>
 const dt = msg.toDate(); // => 2018-01-02T03:04:05.000Z
 ```
 
 ### ES5
 
 ```js
-var MsgExt = require("msg-interface").MsgExt;
+var MsgInterface = require("msg-interface");
+var MsgExt = MsgInterface.MsgExt;
+var msgToBuffer = MsgInterface.msgToBuffer;
 
 function MsgExtDate(payload) {
   MsgExt.call(this, payload);
@@ -52,7 +54,7 @@ MsgExtDate.prototype.toDate = function() {
 
 var now = Date.UTC(2018, 0, 2, 3, 4, 5);
 var msg = MsgExtDate.from(now);
-var buffer = msg.toMsgpack(); // => <Buffer d7 01 42 76 15 28 a3 60 80 00>
+var buffer = msgToBuffer(msg); // => <Buffer d7 01 42 76 15 28 a3 60 80 00>
 var dt = msg.toDate(); // => 2018-01-02T03:04:05.000Z
 ```
 
