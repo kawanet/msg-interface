@@ -5,6 +5,8 @@ import {Msg, isMsg, msgToBuffer} from "../";
 
 const TITLE = __filename.split("/").pop() as string;
 
+const atos = (array: any) => [].map.call(array, (v: number) => (v > 15 ? "" : "0") + v.toString(16)).join("-");
+
 describe(TITLE, () => {
 
     it("Msg", () => {
@@ -85,9 +87,3 @@ describe(TITLE, () => {
         assert.equal(atos(msgToBuffer(msg)), "db-00-00-00-03-41-42-43");
     });
 });
-
-function atos(array: number[] | Buffer) {
-    return [].map.call(array, function (v: number) {
-        return (v > 15 ? "" : "0") + v.toString(16);
-    }).join("-");
-}
