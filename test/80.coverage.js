@@ -8,20 +8,6 @@ var MsgInterface = require("../");
 var TITLE = __filename.split("/").pop();
 
 describe(TITLE, function() {
-
-  it("MsgRaw", function() {
-    var buffer = Buffer.from([1]);
-    var msg = MsgInterface.MsgRaw(buffer);
-    assert(MsgInterface.isMsg(msg));
-    assert.strictEqual(atos(MsgInterface.msgToBuffer(msg)), "01");
-  });
-
-  it("MsgRaw", function() {
-    var msg = MsgInterface.MsgRaw([2]);
-    assert(MsgInterface.isMsg(msg));
-    assert.strictEqual(atos(MsgInterface.msgToBuffer(msg)), "02");
-  });
-
   it("MsgExt", function() {
     var buffer = Buffer.from([3]);
     var msg = MsgInterface.MsgExt(buffer, 4);

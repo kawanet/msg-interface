@@ -4,7 +4,6 @@ exports.isMsg = isMsg;
 exports.msgToBuffer = gen(Buffer.alloc);
 exports.Msg = require("./lib/msg").Msg;
 exports.MsgExt = require("./lib/msg-ext").MsgExt;
-exports.MsgRaw = require("./lib/msg-raw").MsgRaw;
 
 /**
  * @return {boolean} true when the argument has the MsgInterface implemented

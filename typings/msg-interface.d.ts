@@ -38,20 +38,6 @@ export declare abstract class Msg implements MsgInterface {
     writeMsgpackTo(buffer: Buffer, offset?: number): number;
 }
 
-export declare class MsgRaw extends Msg {
-    constructor(buffer: Buffer, start?: number, end?: number);
-
-    /**
-     * raw msgpack representation
-     */
-    buffer: Buffer;
-
-    /**
-     * offset position
-     */
-    offset: number;
-}
-
 export declare class MsgExt extends Msg {
     constructor(payload: Buffer, type?: number);
     constructor(type: number, payload: Buffer);
