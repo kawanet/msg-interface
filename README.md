@@ -1,6 +1,6 @@
-# Msgpack Container Interface
+# msg-interface - Msgpack Container Interface
 
-[![Build Status](https://travis-ci.org/kawanet/msg-interface.svg?branch=master)](https://travis-ci.org/kawanet/msg-interface) [![Coverage Status](https://coveralls.io/repos/github/kawanet/msg-interface/badge.svg)](https://coveralls.io/github/kawanet/msg-interface)
+[![npm version](https://badge.fury.io/js/msg-interface.svg)](http://badge.fury.io/js/msg-interface) [![Build Status](https://travis-ci.org/kawanet/msg-interface.svg?branch=master)](https://travis-ci.org/kawanet/msg-interface) [![Coverage Status](https://coveralls.io/repos/github/kawanet/msg-interface/badge.svg)](https://coveralls.io/github/kawanet/msg-interface)
 
 ### `MsgInterface` interface
 
@@ -44,6 +44,11 @@ declare function msgToBuffer(msg: MsgInterface): Buffer;
 ### GitHub
 
 - [https://github.com/kawanet/msg-interface](https://github.com/kawanet/msg-interface)
+
+### See Also
+
+- [https://github.com/kawanet/msg-ext](https://github.com/kawanet/msg-ext)
+- [https://github.com/kawanet/msg-int64](https://github.com/kawanet/msg-int64)
 
 ### The MIT License (MIT)
 
