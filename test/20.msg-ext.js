@@ -84,4 +84,12 @@ describe(TITLE, function () {
         // invalid type
         assert.throws(function () { return new __1.MsgExt(256, payload); });
     });
+    it("empty array without new", function () {
+        // @ts-ignore
+        var msg = __1.MsgExt([], 1);
+        assert.strictEqual(typeof __1.msgToBuffer, "function");
+        assert(__1.isMsg(msg));
+        assert.strictEqual(atos(__1.msgToBuffer(msg)), "c7-00-01");
+        assert.strictEqual(msg.writeMsgpackTo(Buffer.alloc(3)), 3);
+    });
 });
