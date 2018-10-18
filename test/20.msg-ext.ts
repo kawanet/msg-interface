@@ -109,4 +109,17 @@ describe(TITLE, () => {
         // invalid type
         assert.throws(() => new MsgExt(256, payload));
     });
+
+    it("empty array without new", () => {
+        // @ts-ignore
+        const msg = MsgExt([], 1);
+
+        assert.strictEqual(typeof msgToBuffer, "function");
+
+        assert(isMsg(msg));
+
+        assert.strictEqual(atos(msgToBuffer(msg)), "c7-00-01");
+
+        assert.strictEqual(msg.writeMsgpackTo(Buffer.alloc(3)), 3);
+    });
 });
