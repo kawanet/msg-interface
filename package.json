@@ -30,7 +30,7 @@
     "msgpack"
   ],
   "license": "MIT",
-  "main": "index.js",
+  "main": "./lib/msg-interface.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kawanet/msg-interface.git"
