@@ -37,18 +37,3 @@ export declare abstract class Msg implements MsgInterface {
      */
     writeMsgpackTo(buffer: Buffer, offset?: number): number;
 }
-
-export declare class MsgExt extends Msg {
-    constructor(payload: Buffer, type?: number);
-    constructor(type: number, payload: Buffer);
-
-    /**
-     * payload
-     */
-    buffer: Buffer;
-
-    /**
-     * msgpack extension type number: -128 to +127
-     */
-    type: number;
-}

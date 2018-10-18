@@ -2,8 +2,28 @@
 
 exports.isMsg = isMsg;
 exports.msgToBuffer = gen(Buffer.alloc);
-exports.Msg = require("./msg").Msg;
-exports.MsgExt = require("./msg-ext").MsgExt;
+exports.Msg = Msg;
+
+/**
+ * a msgpack representation container
+ */
+
+function Msg() {
+  // do nothing
+}
+
+(function(P) {
+
+  P.msgpackLength = void 0;
+
+  P.writeMsgpackTo = writeMsgpackTo;
+
+})(Msg.prototype);
+
+function writeMsgpackTo(buffer, offset) {
+  /*jshint unused:false*/
+  throw new Error("Method not implemented: writeMsgpackTo");
+}
 
 /**
  * @return {boolean} true when the argument has the MsgInterface implemented

@@ -30,7 +30,7 @@
     "msgpack"
   ],
   "license": "MIT",
-  "main": "./lib/msg-interface.js",
+  "main": "./msg-interface.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kawanet/msg-interface.git"
@@ -40,10 +40,10 @@
     "fixpack": "fixpack",
     "jshint": "./node_modules/.bin/jshint .",
     "mocha": "./node_modules/.bin/mocha test/*.js",
-    "test": "npm run tsc && npm run jshint && npm run mocha",
+    "test": "npm run jshint && npm run mocha",
     "tsc": "./node_modules/.bin/tsc",
     "tsc-watch": "./node_modules/.bin/tsc --watch",
     "zuul-local": "./node_modules/.bin/zuul --local 4000 --ui mocha-bdd test/*.js"
   },
-  "typings": "typings/msg-interface.d.ts"
+  "typings": "./msg-interface.d.ts"
 }
