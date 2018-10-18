@@ -1,7 +1,7 @@
 {
   "name": "msg-interface",
   "description": "Msgpack Container Interface",
-  "version": "0.99.714",
+  "version": "1.0.0",
   "author": "@kawanet",
   "bugs": {
     "url": "https://github.com/kawanet/msg-interface/issues"
@@ -42,7 +42,7 @@
     "jshint": "./node_modules/.bin/jshint .",
     "mocha": "./node_modules/.bin/mocha test/*.js",
     "test": "npm run jshint && npm run mocha",
-    "zuul-local": "./node_modules/.bin/zuul --local 4000 --ui mocha-bdd test/*.js"
+    "zuul-local": "./node_modules/.bin/zuul --open --local 4000 --ui mocha-bdd test/*.js"
   },
   "typings": "./msg-interface.d.ts"
 }
