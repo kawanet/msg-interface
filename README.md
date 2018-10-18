@@ -2,7 +2,50 @@
 
 [![Build Status](https://travis-ci.org/kawanet/msg-interface.svg?branch=master)](https://travis-ci.org/kawanet/msg-interface) [![Coverage Status](https://coveralls.io/repos/github/kawanet/msg-interface/badge.svg)](https://coveralls.io/github/kawanet/msg-interface)
 
-### ES6
+### `MsgInterface` interface
+
+- `MsgInterface` is the interface for classes which support [msgpack](https://msgpack.org/) representation.
+
+```typescript
+interface MsgInterface {
+    msgpackLength: number;
+    writeMsgpackTo(buffer: Buffer, offset?: number): number;
+}
+```
+
+### `msgpackLength` property
+
+- `msgpackLength` is maximum byte length possible for msgpack representation. It must be equal to or greater than the actual length.
+
+### `writeMsgpackTo()` method
+
+- `writeMsgpackTo()` writes msgpack representation to the BYO Buffer and returns the actual byte length written.
+
+### `isMsg()` static method
+
+- `isMsg()` returns true if the specified object implements the valid `MsgInterface`, otherwise false.
+
+```typescript
+declare function isMsg(msg: any): boolean;
+```
+
+### `msgToBuffer()` static method
+
+- `msgToBuffer()` returns a Buffer which contains msgpack representation.
+
+```typescript
+declare function msgToBuffer(msg: MsgInterface): Buffer;
+```
+
+### `Msg` abstract class
+
+- `Msg` is the abstract class for msgpack container classes.
+
+### `MsgExt` class
+
+- `MsgExt` is the base class for msgpack's ext formats.
+
+`MsgExt` in ES6:
 
 ```js
 import {MsgExt, msgToBuffer} from "msg-interface";
@@ -27,7 +70,7 @@ const buffer = msgToBuffer(msg); // => <Buffer d7 01 42 76 15 28 a3 60 80 00>
 const dt = msg.toDate(); // => 2018-01-02T03:04:05.000Z
 ```
 
-### ES5
+`MsgExt` in ES5:
 
 ```js
 var MsgInterface = require("msg-interface");
