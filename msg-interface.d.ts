@@ -12,7 +12,7 @@ export interface MsgInterface {
      * write the msgpack representation to the buffer with an optional offset address
      * @return {number} actual length of written in bytes
      */
-    writeMsgpackTo(buffer: Buffer, offset?: number): number;
+    writeMsgpackTo(buffer: Buffer, offset: number): number;
 }
 
 /**
@@ -35,5 +35,5 @@ export declare abstract class Msg implements MsgInterface {
      * write the msgpack representation to the buffer with an optional offset address
      * @return {number} actual length of msgpack representation written
      */
-    writeMsgpackTo(buffer: Buffer, offset?: number): number;
+    writeMsgpackTo(buffer: Buffer, offset: number): number;
 }

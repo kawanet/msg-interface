@@ -9,7 +9,7 @@
 ```typescript
 interface MsgInterface {
     msgpackLength: number;
-    writeMsgpackTo(buffer: Buffer, offset?: number): number;
+    writeMsgpackTo(buffer: Buffer, offset: number): number;
 }
 ```
 
