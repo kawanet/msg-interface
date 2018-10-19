@@ -1,6 +1,6 @@
 # msg-interface - Msgpack Container Interface
 
-[![npm version](https://badge.fury.io/js/msg-interface.svg)](http://badge.fury.io/js/msg-interface) [![Build Status](https://travis-ci.org/kawanet/msg-interface.svg?branch=master)](https://travis-ci.org/kawanet/msg-interface) [![Coverage Status](https://coveralls.io/repos/github/kawanet/msg-interface/badge.svg)](https://coveralls.io/github/kawanet/msg-interface)
+[![npm version](https://badge.fury.io/js/msg-interface.svg)](http://badge.fury.io/js/msg-interface) [![Build Status](https://travis-ci.org/kawanet/msg-interface.svg?branch=master)](https://travis-ci.org/kawanet/msg-interface)
 
 ### `MsgInterface` interface
 
@@ -36,10 +36,6 @@ declare function isMsg(msg: any): boolean;
 ```typescript
 declare function msgToBuffer(msg: MsgInterface): Buffer;
 ```
-
-### `Msg` abstract class
-
-- `Msg` is the abstract class for msgpack container classes.
 
 ### GitHub
 
